@@ -1,0 +1,92 @@
+[
+  {
+    "id": "gt-01",
+    "query": "Investigate high latency and packet loss in cell KOL-5G-017",
+    "cell_id": "KOL-5G-017",
+    "true_root_cause_category": "congestion",
+    "acceptable_causes": ["congestion"],
+    "relevant_doc_ids": ["prb-utilization-capacity", "congestion-triage-runbook", "kpi-definitions-thresholds"],
+    "expected_action_keywords": ["carrier aggregation", "load", "capacity"]
+  },
+  {
+    "id": "gt-02",
+    "query": "Cell KOL-5G-017 users reporting slow speeds during busy hour",
+    "cell_id": "KOL-5G-017",
+    "true_root_cause_category": "congestion",
+    "acceptable_causes": ["congestion"],
+    "relevant_doc_ids": ["prb-utilization-capacity", "congestion-triage-runbook"],
+    "expected_action_keywords": ["load", "carrier", "capacity"]
+  },
+  {
+    "id": "gt-03",
+    "query": "SINR is degrading on cell KOL-5G-004, please investigate",
+    "cell_id": "KOL-5G-004",
+    "true_root_cause_category": "interference",
+    "acceptable_causes": ["interference"],
+    "relevant_doc_ids": ["interference-and-pim", "kpi-definitions-thresholds"],
+    "expected_action_keywords": ["PIM", "interference", "connector", "sweep"]
+  },
+  {
+    "id": "gt-04",
+    "query": "Drop rate increasing on cell KOL-5G-004, possible interference",
+    "cell_id": "KOL-5G-004",
+    "true_root_cause_category": "interference",
+    "acceptable_causes": ["interference"],
+    "relevant_doc_ids": ["interference-and-pim"],
+    "expected_action_keywords": ["PIM", "spectrum", "interference"]
+  },
+  {
+    "id": "gt-05",
+    "query": "High latency and packet loss reported for cell DEL-5G-009",
+    "cell_id": "DEL-5G-009",
+    "true_root_cause_category": "backhaul_degradation",
+    "acceptable_causes": ["backhaul_degradation"],
+    "relevant_doc_ids": ["transport-backhaul-troubleshooting", "packet-loss-triage"],
+    "expected_action_keywords": ["backhaul", "transport", "link"]
+  },
+  {
+    "id": "gt-06",
+    "query": "Cell DEL-5G-009 throughput capped regardless of load, investigate",
+    "cell_id": "DEL-5G-009",
+    "true_root_cause_category": "backhaul_degradation",
+    "acceptable_causes": ["backhaul_degradation"],
+    "relevant_doc_ids": ["transport-backhaul-troubleshooting"],
+    "expected_action_keywords": ["backhaul", "transport", "fail over"]
+  },
+  {
+    "id": "gt-07",
+    "query": "Users complaining about poor signal in cell MUM-5G-012",
+    "cell_id": "MUM-5G-012",
+    "true_root_cause_category": "poor_coverage",
+    "acceptable_causes": ["poor_coverage"],
+    "relevant_doc_ids": ["coverage-optimization-antenna-tilt", "kpi-definitions-thresholds"],
+    "expected_action_keywords": ["antenna", "tilt", "coverage"]
+  },
+  {
+    "id": "gt-08",
+    "query": "RSRP very low at cell edge of MUM-5G-012, investigate coverage",
+    "cell_id": "MUM-5G-012",
+    "true_root_cause_category": "poor_coverage",
+    "acceptable_causes": ["poor_coverage"],
+    "relevant_doc_ids": ["coverage-optimization-antenna-tilt"],
+    "expected_action_keywords": ["antenna", "tilt", "power"]
+  },
+  {
+    "id": "gt-09",
+    "query": "Handover failures happening on cell BLR-5G-021",
+    "cell_id": "BLR-5G-021",
+    "true_root_cause_category": "handover_problems",
+    "acceptable_causes": ["handover_problems"],
+    "relevant_doc_ids": ["handover-parameter-optimization"],
+    "expected_action_keywords": ["neighbor relation", "handover", "TTT"]
+  },
+  {
+    "id": "gt-10",
+    "query": "Investigate handover ping-pong and neighbor relation issue on BLR-5G-021",
+    "cell_id": "BLR-5G-021",
+    "true_root_cause_category": "handover_problems",
+    "acceptable_causes": ["handover_problems"],
+    "relevant_doc_ids": ["handover-parameter-optimization"],
+    "expected_action_keywords": ["neighbor relation", "hysteresis", "TTT"]
+  }
+]
