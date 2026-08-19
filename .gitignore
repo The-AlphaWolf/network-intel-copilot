@@ -11,3 +11,4 @@ frontend/.next/
 frontend/out/
 *.log
 .DS_Store
+frontend/.env.local
