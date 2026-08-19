@@ -124,11 +124,18 @@ def _log_to_mlflow(params: dict, metrics: dict, artifact_path: Path) -> None:
         return
 
     settings = get_settings()
-    mlruns_dir = Path(settings.mlflow_tracking_uri).resolve()
-    mlruns_dir.mkdir(parents=True, exist_ok=True)
-    # MLflow 3.x deprecated the plain filesystem store in favor of a
-    # database-backed one; SQLite keeps this fully local/dependency-free.
-    mlflow.set_tracking_uri(f"sqlite:///{(mlruns_dir / 'mlflow.db').as_posix()}")
+    uri = settings.mlflow_tracking_uri
+    if "://" in uri:
+        # Already a proper URI - an MLflow tracking server (docker-compose
+        # sets this to http://mlflow:5000) or an explicit sqlite:/file: URI.
+        mlflow.set_tracking_uri(uri)
+    else:
+        # Bare local path (the native/no-Docker default) - MLflow 3.x
+        # deprecated the plain filesystem store, so point it at a SQLite
+        # file under that directory instead.
+        mlruns_dir = Path(uri).resolve()
+        mlruns_dir.mkdir(parents=True, exist_ok=True)
+        mlflow.set_tracking_uri(f"sqlite:///{(mlruns_dir / 'mlflow.db').as_posix()}")
     mlflow.set_experiment(settings.mlflow_experiment)
     with mlflow.start_run(run_name=f"eval-{time.strftime('%Y%m%d-%H%M%S')}"):
         mlflow.log_params(params)

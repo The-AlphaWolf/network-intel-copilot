@@ -12,6 +12,7 @@ export default function OverviewPage() {
   const [cells, setCells] = useState<Cell[]>([]);
   const [investigations, setInvestigations] = useState<InvestigationResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([getOverview(), listCells(), listInvestigations(5)])
@@ -20,7 +21,8 @@ export default function OverviewPage() {
         setCells(c);
         setInvestigations(inv);
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
   }, []);
 
   const avgInvestigationMs = investigations.length
@@ -35,6 +37,8 @@ export default function OverviewPage() {
       </div>
     );
   }
+
+  if (loading) return <EmptyState message="Loading network overview..." />;
 
   return (
     <div className="space-y-6">

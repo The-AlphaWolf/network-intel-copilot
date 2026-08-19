@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { listCells, getTopology, Cell, Topology } from "@/lib/api";
-import { Card, CardHeader, Badge, StatDot } from "@/components/ui";
+import { Card, CardHeader, Badge, StatDot, EmptyState } from "@/components/ui";
 import { healthColor } from "@/lib/format";
 import { TopologyView } from "@/components/TopologyView";
 
@@ -11,14 +11,17 @@ export default function CellsPage() {
   const [cells, setCells] = useState<Cell[]>([]);
   const [topology, setTopology] = useState<Topology | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([listCells(), getTopology()])
       .then(([c, t]) => { setCells(c); setTopology(t); })
-      .catch((e) => setError(e.message));
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
   }, []);
 
   if (error) return <div className="rounded-lg border border-red/30 bg-red/5 p-4 text-sm text-red">{error}</div>;
+  if (loading) return <EmptyState message="Loading cells..." />;
 
   return (
     <div className="space-y-6">

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data_out/
+mlruns/
+.pytest_cache/
+tests/
