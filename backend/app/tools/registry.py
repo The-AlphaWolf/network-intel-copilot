@@ -16,7 +16,7 @@ from app.rag.vectorstore import VectorStore
 
 
 @lru_cache
-def _vector_store() -> VectorStore:
+def get_vector_store() -> VectorStore:
     settings = get_settings()
     return VectorStore(get_embedder(settings), settings)
 
@@ -66,7 +66,7 @@ def search_knowledge_base(query: str, top_k: int = 5, category: str | None = Non
     """Semantic search over the technical knowledge base. Returns cited chunks
     with doc_id, section, chunk_id, score - never fabricate a citation, only
     use chunk_ids returned here."""
-    return _vector_store().search(query, top_k=top_k, category=category)
+    return get_vector_store().search(query, top_k=top_k, category=category)
 
 
 # ---------------------------------------------------------------------------

@@ -3,12 +3,11 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-backend/data_out/
-backend/mlruns/
+**/data_out/
+**/mlruns/
 backend/.pytest_cache/
 node_modules/
 frontend/.next/
 frontend/out/
 *.log
 .DS_Store
-backend/data_out/qdrant/
