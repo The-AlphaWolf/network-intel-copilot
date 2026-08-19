@@ -46,15 +46,23 @@ CLIP_BOUNDS = {
 
 
 def _ramp(hour: float, window: tuple[float, float] | None) -> float:
+    """Ramp from 0->1 over the first 15% of the window, then hold at 1. Only
+    ramps back down if the window closes before the end of the data (24h) -
+    a window ending at/after 24 means the incident is still ongoing at
+    "now", so it stays held rather than falling right at the data boundary."""
     if window is None:
         return 0.0
     start, end = window
     if start <= 0 and end >= 24:
         return 1.0  # persistent condition (e.g. physical coverage hole)
-    if hour < start or hour > end:
+    if hour < start:
         return 0.0
     dur = max(end - start, 0.5)
     rise = min(1.0, (hour - start) / (dur * 0.15))
+    if end >= 24:
+        return max(0.0, min(rise, 1.0))  # held through end of data, no rampdown
+    if hour > end:
+        return 0.0
     fall = min(1.0, (end - hour) / (dur * 0.10))
     return max(0.0, min(rise, fall, 1.0))
 

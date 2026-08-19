@@ -130,7 +130,7 @@ def expected_baseline(kpi: str, hour: float) -> tuple[float, float]:
 SCENARIOS: dict[str, dict] = {
     "healthy": {"window": None, "effects": {}},
     "congestion": {
-        "window": (17, 23),
+        "window": (18, 24),  # ongoing through "now" (end of data) - active incident
         "effects": {
             "prb_utilization_pct": {"peak_delta": 62.0, "noise_mult": 1.2},
             "active_users": {"peak_delta": 130.0, "noise_mult": 1.3},
@@ -140,7 +140,7 @@ SCENARIOS: dict[str, dict] = {
         },
     },
     "interference": {
-        "window": (14, 22),
+        "window": (15, 24),
         "effects": {
             "sinr_db": {"peak_delta": -15.0, "noise_mult": 1.5},
             "rsrq_db": {"peak_delta": -7.5, "noise_mult": 1.4},
@@ -149,7 +149,7 @@ SCENARIOS: dict[str, dict] = {
         },
     },
     "backhaul_degradation": {
-        "window": (9, 21),
+        "window": (11, 24),
         "effects": {
             "latency_ms": {"peak_delta": 124.0, "noise_mult": 3.0},
             "packet_loss_pct": {"peak_delta": 5.8, "noise_mult": 2.2},
@@ -167,7 +167,7 @@ SCENARIOS: dict[str, dict] = {
         },
     },
     "handover_problems": {
-        "window": (10, 20),
+        "window": (14, 24),
         "effects": {
             "handover_success_rate_pct": {"peak_delta": -18.0, "noise_mult": 1.8},
             "drop_rate_pct": {"peak_delta": 1.4, "noise_mult": 1.5},
